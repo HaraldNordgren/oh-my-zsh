@@ -35,13 +35,13 @@ git_prompt() {
   fi
 }
 
-local smiley='%(?.%F{green}☺%f.%F{red}☹%f)'
+local psign="%(?,$,%{$fg[red]%}$%{$reset_color%})"
+local user="%{$bg[blue]%}%n%{$reset_color%}"
+local host="%{$bg[blue]%}@%m%{$reset_color%}"
 
 PROMPT='
-${VIRTUAL_ENV:+"($VIRTUAL_ENV) "}%~
-${smiley}  '
-
-RPROMPT='%F{white} $(ruby_prompt_info)$(git_prompt)%{$reset_color%}'
+${user}${host} %3~ (%{$fg[white]%}$(git_prompt)%{$reset_color%} )
+${psign} '
 
 # Disable automatic virtualenv prompt change
 export VIRTUAL_ENV_DISABLE_PROMPT=1
